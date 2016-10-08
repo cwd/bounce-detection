@@ -27,7 +27,7 @@ class RuleFactory
      * @return RuleConfig
      * @throws \Exception
      */
-    static public function getRules($ruleFile = null)
+    public static function getRules($ruleFile = null)
     {
         if ($ruleFile === null) {
             $ruleFile = __DIR__.'/'.self::RULE_FILE;

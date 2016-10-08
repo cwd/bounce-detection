@@ -1,0 +1,9 @@
+
+build:
+  tests:
+    override:
+      -
+        command: 'phpunit --coverage-clover=cov.xml'
+        coverage:
+          file: 'cov.xml'
+          format: 'clover'
