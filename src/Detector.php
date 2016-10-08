@@ -37,6 +37,10 @@ class Detector
     {
         $result = $this->testRulesAgainst($this->ruleConfig->getBodyRules(), $mail);
 
+        if ($result === null) {
+            $result = $this->testRulesAgainst($this->ruleConfig->getDSNRules(), $mail);
+        }
+
         return $result;
     }
 

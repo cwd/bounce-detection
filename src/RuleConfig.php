@@ -41,6 +41,14 @@ class RuleConfig implements \IteratorAggregate
     }
 
     /**
+     * @return mixed|null
+     */
+    public function getDSNRules()
+    {
+        return (isset($this->rules['dsn'])) ? $this->rules['dsn'] : null;
+    }
+
+    /**
      * @return \ArrayIterator
      */
     public function getIterator()

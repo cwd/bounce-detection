@@ -34,14 +34,56 @@ class BounceTest extends \PHPUnit_Framework_TestCase
         self::$detector = new Detector();
     }
 
-    public function testNoFound()
+    /**
+     *
+     * @return array
+     */
+    public static function mailDataProvider()
     {
-        $mail = file_get_contents('tests/fixtures/PHP-Bounce-Handler/1.eml');
+        return self::readFixtures('tests/fixtures');
+    }
+
+    /**
+     * @param string $fileName
+     * @dataProvider mailDataProvider
+     */
+    public function testMail($fileName)
+    {
+        $mail = file_get_contents($fileName);
 
         $result = self::$detector->testAll($mail);
 
-        $this->assertArrayHasKey('rule_no', $result);
-        $this->assertEquals($result['rule_no'], '0157');
-        $this->assertEquals($result['rule_cat'], 'unknown');
+        /*
+        if ($result === null) {
+            dump([$fileName => '-- Nothing found --']);
+        } else {
+            dump([$fileName => $result]);
+        }
+         */
+
+        $this->assertEquals(true, is_array($result));
+
+    }
+
+    /**
+     * @param string $directory
+     *
+     * @return array
+     */
+    protected static function readFixtures($directory)
+    {
+        $fixtures = [];
+
+        $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory));
+        foreach($objects as $name => $object) {
+            $filename = $object->getFilename();
+            if ($filename === '.' || $filename === '..' || $filename === 'README') {
+                continue;
+            }
+
+            $fixtures[] = [$name];
+        }
+
+        return $fixtures;
     }
 }
