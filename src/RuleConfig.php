@@ -49,6 +49,23 @@ class RuleConfig implements \IteratorAggregate
     }
 
     /**
+     * @return array
+     */
+    public function getEmailRules()
+    {
+        return (isset($this->rules['email'])) ? $this->rules['email'] : null;
+    }
+
+    /**
+     *
+     * @return string|null
+     */
+    public function getDiagnosticRegExp()
+    {
+        return isset($this->rules['diagnostic']) ? $this->rules['diagnostic'] : null;
+    }
+
+    /**
      * @return \ArrayIterator
      */
     public function getIterator()

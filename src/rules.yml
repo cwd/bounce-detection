@@ -561,6 +561,14 @@ dsn:
     category: 'delayed'
     number: '0213'
 
+  - regexp: '/Delivery to the following recipient has been delayed/is'
+    category: 'delayed'
+    number: '0214'
+
+  - regexp: '/Delivery to the following recipient failed permanently/is'
+    category: 'unknown'
+    number: '0245'
+
   - regexp: '/(?:alias|account|recipient|address|email|mailbox|user)(.*)invalid/i'
     category: 'unknown'
     number: '0107'
@@ -658,14 +666,9 @@ email:
   - regexp: '/Final-Recipient: rfc822;(.*)/i'
   - regexp: '/quota exceed.*<(\S+@\S+\w)>/is'
 
-action:
-  - regexp: '/Action: (.+)/i'
-
-status:
-  - regexp: '/Status: ([0-9\.]+)/i'
-
-diagnostic:
-  - regexp: '/Diagnostic-Code:((?:[^\n]|\n[\t ])+)(?:\n[^\t ]|$)/is'
+action: '/Action: (.+)/i'
+status: '/Status: ([0-9\.]+)/i'
+diagnostic: '/Diagnostic-Code:((?:[^\n]|\n[\t ])+)(?:\n[^\t ]|$)/is'
 
 
 
