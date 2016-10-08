@@ -30,7 +30,7 @@ class RuleFactory
     static public function getRules($ruleFile = null)
     {
         if ($ruleFile === null) {
-            $ruleFile = __DIR__.self::RULE_FILE;
+            $ruleFile = __DIR__.'/'.self::RULE_FILE;
         }
 
         if (!file_exists($ruleFile) || !is_readable($ruleFile)) {
