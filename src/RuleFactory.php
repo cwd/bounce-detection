@@ -19,7 +19,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class RuleFactory
 {
-    const RULE_FILE = __DIR__."/rules.yml";
+    const RULE_FILE = 'rules.yml';
 
     /**
      * @param null|string $ruleFile
@@ -30,7 +30,7 @@ class RuleFactory
     static public function getRules($ruleFile = null)
     {
         if ($ruleFile === null) {
-            $ruleFile = self::RULE_FILE;
+            $ruleFile = __DIR__.self::RULE_FILE;
         }
 
         if (!file_exists($ruleFile) || !is_readable($ruleFile)) {
