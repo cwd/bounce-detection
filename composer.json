@@ -1,7 +1,7 @@
 {
     "name": "cwd/bounce-detection",
     "type": "library",
-    "description": "TableBundle makes dealing with tables easier. This bundle manage the most common needs for tables. It works and flexible as Symfony Forms. For more documentations see http://www.table-bundle.com",
+    "description": "Detect if a mail (string) is bounce mail - soft and hard bounce support",
     "keywords": ["email", "bounce", "smtp"],
     "license": "MIT",
     "support": {
