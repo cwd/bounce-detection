@@ -1,4 +1,7 @@
 build:
+  dependencies:
+    before:
+      - 'pecl install mailparse-2.1.6'
   environment:
     postgresql: false
     redis: false
