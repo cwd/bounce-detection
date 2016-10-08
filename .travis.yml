@@ -12,9 +12,11 @@ matrix:
       env: COVERAGE=yes
     - php: 7.0
       env: COMPOSER_FLAGS='--prefer-lowest --prefer-stable'
+    - php: 7.1
   allow_failures:
     - php: hhvm
     - php: nightly
+    - php: 7.1
   fast_finish: true
 
 before_install:
