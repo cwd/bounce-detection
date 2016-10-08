@@ -24,6 +24,5 @@
         "psr-4": {
             "Cwd\\BounceDetection\\": "src/"
         }
-    },
-    "target-dir": "Cwd/BounceDetection"
+    }
 }
