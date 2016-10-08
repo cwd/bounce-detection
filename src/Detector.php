@@ -43,7 +43,7 @@ class Detector
         }
 
         if ($result === null) {
-
+            // @todo
         }
 
         $result['email'] = $this->findEmail($mail);

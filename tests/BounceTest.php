@@ -10,6 +10,8 @@
 namespace Cwd\BounceDetection\Tests;
 
 use Cwd\BounceDetection\Detector;
+use Cwd\BounceDetection\RuleFactory;
+use Cwd\BounceDetection\RuleConfig;
 
 /**
  * Class BounceTest
@@ -63,6 +65,25 @@ class BounceTest extends \PHPUnit_Framework_TestCase
     public static function mailDataProvider()
     {
         return self::readFixtures('tests/fixtures');
+    }
+
+    public function testFactory()
+    {
+        $rules = RuleFactory::getRules();
+
+        $this->assertGreaterThan(0, $rules->getBodyRules());
+        $this->assertGreaterThan(0, $rules->getDSNRules());
+        $this->assertGreaterThan(0, $rules->getEmailRules());
+        $this->assertNotNull($rules->getDiagnosticRegExp());
+        $this->assertInstanceOf(\ArrayIterator::class, $rules->getIterator());
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testFactoryRulesNotFound()
+    {
+        $rules = RuleFactory::getRules('/notfound');
     }
 
     /**
