@@ -1,70 +1,672 @@
 body:
-  -
-    regexp: '/domain\s+name\s+not\s+found/i'
+  - regexp: '/domain\s+name\s+not\s+found/i'
     category: 'dns_unknown'
     number: '0999'
 
-  -
-    regexp: '/no\s+such\s+address\s+here/i'
+  - regexp: '/no\s+such\s+address\s+here/i'
     category: 'unknown'
     number: '0237'
 
-  -
-    regexp: '/user\s+unknown/i'
+  - regexp: '/user\s+unknown/i'
     category: 'unknown'
     number: '0236'
 
-  -
-    regexp: '/unknown\s+user/i'
+  - regexp: '/unknown\s+user/i'
     category: 'unknown'
     number: '0249'
 
-  -
-    regexp: '/no\s+mailbox/i'
+  - regexp: '/no\s+mailbox/i'
     category: 'unknown'
     number: '0157'
 
-  -
-    regexp: "/can't\\s+find.*mailbox/i"
+  - regexp: "/can't\\s+find.*mailbox/i"
     category: 'unknown'
     number: '0164'
 
-  -
-    regexp: "/Can't\\s+create\\s+output.*<(\\S+@\\S+\\w)>/is"
+  - regexp: "/Can't\\s+create\\s+output.*<(\\S+@\\S+\\w)>/is"
     category: 'unknown'
     number: '0169'
 
-  -
-    regexp: '/=D5=CA=BA=C5=B2=BB=B4=E6=D4=DA/i'
+  - regexp: '/=D5=CA=BA=C5=B2=BB=B4=E6=D4=DA/i'
     category: 'unknown'
     number: '0174'
 
-  -
-    regexp: '/Unrouteable\s+address/i'
+  - regexp: '/Unrouteable\s+address/i'
     category: 'unknown'
     number: '0013'
     idx_email: 1
 
-  -
-    regexp: '/unknown\s+local-part/i'
+  - regexp: '/unknown\s+local-part/i'
     category: 'unknown'
     number: '0232'
 
-  -
-    regexp: '/Invalid.*(?:alias|account|recipient|address|email|mailbox|user).*<(\S+@\S+\w)>/is'
+  - regexp: '/Invalid.*(?:alias|account|recipient|address|email|mailbox|user).*<(\S+@\S+\w)>/is'
     category: 'unknown'
     number: '0233'
     idx_email: 1
 
-  -
-    regexp: '/No\s+such.*(?:alias|account|recipient|address|email|mailbox|user).*<(\S+@\S+\w)>/is'
+  - regexp: '/No\s+such.*(?:alias|account|recipient|address|email|mailbox|user).*<(\S+@\S+\w)>/is'
     category: 'unknown'
     number: '0234'
     idx_email: 1
 
-  -
-    regexp: '/not unique.\s+Several matches found/i'
+  - regexp: '/not unique.\s+Several matches found/i'
     category: 'unknown'
     number: '0254'
+
+  - regexp: '/over.*quota/i'
+    category: 'full'
+    number: '0182'
+
+  - regexp: '/quota\s+exceeded.*<(\S+@\S+\w)>/is'
+    category: 'full'
+    number: '0126'
+    idx_email: 1
+
+  - regexp: '/quota\s+exceeded/i'
+    category: 'full'
+    number: '0158'
+
+  - regexp: '/mailbox.*full/i'
+    category: 'full'
+    number: '0166'
+
+  - regexp: '/The message to (\S+@\S+\w)\s.*bounce.*Quota exceed/i'
+    category: 'full'
+    number: '0168'
+    idx_email: 1
+
+  - regexp: '/not\s+enough\s+storage\s+space/i'
+    category: 'full'
+    number: '0253'
+
+  - regexp: '/user is inactive/i'
+    category: 'inactive'
+    number: '0171'
+
+  - regexp: '/(\S+@\S+\w).*n? is restricted/i'
+    category: 'inactive'
+    number: '0201'
+
+  - regexp: '/inactive account/i'
+    category: 'inactive'
+    number: '0181'
+
+  - regexp: '/<(\S+@\S+\w)>.*\n.*mailbox unavailable/i'
+    category: 'inactive'
+    number: '124'
+
+  - regexp: '/<(\S+@\S+\w)>.*\n?.*\n?.*account that you tried to reach does not exist/i'
+    category: 'unknown'
+    number: '7770'
+    idx_email: 1
+
+  - regexp: '/Technical details of permanent failure:\s+TEMP_FAILURE: Could not initiate SMTP conversation with any hosts/i'
+    category: 'dns_unknown'
+    number: '0251'
+
+  - regexp: '/Technical details of temporary failure:\s+TEMP_FAILURE: Could not initiate SMTP conversation with any hosts/i'
+    category: 'delayed'
+    number: '0252'
+
+  - regexp: '/Technical details of temporary failure:\s+TEMP_FAILURE: The recipient server did not accept our requests to connect./i'
+    category: 'delayed'
+    number: '0256'
+
+  - regexp: '/input\/output error/i'
+    category: 'internal_error'
+    number: '0172'
+    bounce_type: 'hard'
+
+  - regexp: '/can not open new email file/i'
+    category: 'internal_error'
+    number: '0173'
+    bounce_type: 'hard'
+
+  - regexp: '/Resources temporarily unavailable/i'
+    category: 'defer'
+    number: '0163'
+
+  - regexp: '/^AutoReply message from (\S+@\S+\w)/i'
+    category: 'autoreply'
+    number: '0167'
+    idx_email: 1
+
+  - regexp: '/Your message \([^)]+\) was blocked by/i'
+    category: 'antispam'
+    number: '0250'
+
+  - regexp: '/Messages\s+without\s+\S+\s+fields\s+are\s+not\s+accepted\s+here/i'
+    category: 'content_reject'
+    number: '0248'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*no\s+longer\s+accepts\s+mail/i'
+    category: 'inactive'
+    number: '0235'
+
+  - regexp: '/does not accept[^\r\n]*non-Western/i'
+    category: 'latin_only'
+    number: '0043'
+
+  - regexp: "/554.*delivery error.*this user.*doesn't have.*account/is"
+    category: 'unknown'
+    number: '0044'
+
+  - regexp: '/550.*Requested.*action.*not.*taken:.*mailbox.*unavailable/is'
+    category: 'unknown'
+    number: '0045'
+
+  - regexp: '/550 5\.1\.1.*Recipient address rejected/is'
+    category: 'unknown'
+    number: '0046'
+
+  - regexp: '/550.*in reply to end of DATA command/i'
+    category: 'unknown'
+    number: '0047'
+
+  - regexp: '/550.*in reply to RCPT TO command/i'
+    category: 'unknown'
+    number: '0048'
+
+  - regexp: '/unrouteable\s+mail\s+domain/i'
+    category: 'dns_unknown'
+    number: '0247'
+
+dsn:
+  - regexp: '/over.*quota/is'
+    category: 'full'
+    number: '0105'
+
+  - regexp: '/exceed.*quota/is'
+    category: 'full'
+    number: '0129'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*full/is'
+    category: 'full'
+    number: '0145'
+
+  - regexp: '/Insufficient system storage/is'
+    category: 'full'
+    number: '0134'
+
+  - regexp: '/Benutzer hat zuviele Mails auf dem Server/is'
+    category: 'full'
+    number: '0998'
+
+  - regexp: '/exceeded storage allocation/is'
+    category: 'full'
+    number: '0997'
+
+  - regexp: '/Mailbox quota usage exceeded/is'
+    category: 'full'
+    number: '0996'
+
+  - regexp: '/User has exhausted allowed storage space/is'
+    category: 'full'
+    number: '0995'
+
+  - regexp: '/User mailbox exceeds allowed size/is'
+    category: 'full'
+    number: '0994'
+
+  - regexp: '/not.*enough\s+space/i'
+    category: 'full'
+    number: '0246'
+
+  - regexp: '/File too large/is'
+    category: 'full'
+    number: '0192'
+
+  - regexp: '/larger than.*limit/is'
+    category: 'oversize'
+    number: '0146'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user)(.*)not(.*)list/is'
+    category: 'unknown'
+    number: '0103'
+
+  - regexp: '/user path no exist/is'
+    category: 'unknown'
+    number: '0106'
+
+  - regexp: '/Relay.*(?:denied|prohibited)/is'
+    category: 'unknown'
+    number: '0108'
+
+  - regexp: '/no.*valid.*(?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '0185'
+
+  - regexp: '/Invalid.*(?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '0111'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*(?:disabled|discontinued)/is'
+    category: 'unknown'
+    number: '0114'
+
+  - regexp: "/user doesn't have.*account/is"
+    category: 'unknown'
+    number: '0127'
+
+  - regexp: '/(?:unknown|illegal).*(?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '0128'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*(?:un|not\s+)available/is'
+    category: 'unknown'
+    number: '0122'
+
+  - regexp: '/no (?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '0123'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*unknown/is'
+    category: 'unknown'
+    number: '0125'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*disabled/is'
+    category: 'unknown'
+    number: '0133'
+
+  - regexp: '/No such (?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '0143'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*NOT FOUND/is'
+    category: 'unknown'
+    number: '0136'
+
+  - regexp: '/deactivated (?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '0138'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*reject/is'
+    category: 'unknown'
+    number: '0148'
+
+  - regexp: '/bounce.*administrator/is'
+    category: 'unknown'
+    number: '0151'
+
+  - regexp: '/<.*>.*disabled/is'
+    category: 'unknown'
+    number: '0152'
+
+  - regexp: '/not our customer/is'
+    category: 'unknown'
+    number: '1054'
+
+  - regexp: '/Wrong (?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '0159'
+
+  - regexp: '/(?:unknown|bad).*(?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '0160'
+
+  - regexp: '/(?:unknown|bad).*(?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'unknown'
+    number: '01601'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*not OK/is'
+    category: 'unknown'
+    number: '0186'
+
+  - regexp: '/Access.*Denied/is'
+    category: 'unknown'
+    number: '0189'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*lookup.*fail/is'
+    category: 'unknown'
+    number: '0195'
+
+  - regexp: '/(?:recipient|address|email|mailbox|user).*not.*member of domain/is'
+    category: 'unknown'
+    number: '0198'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*cannot be verified/is'
+    category: 'unknown'
+    number: '0202'
+
+  - regexp: '/Unable to relay/is'
+    category: 'unknown'
+    number: '0203'
+
+  - regexp: "/(?:alias|account|recipient|address|email|mailbox|user).*(?:n't|not) exist/is"
+    category: 'unknown'
+    number: '0205'
+
+  - regexp: '/not have an account/is'
+    category: 'unknown'
+    number: '0207'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*is not allowed/is'
+    category: 'unknown'
+    number: '0220'
+
+  - regexp: '/not unique.\s+Several matches found/i'
+    category: 'unknown'
+    number: '0255'
+
+  - regexp: '/inactive.*(?:alias|account|recipient|address|email|mailbox|user)/is'
+    category: 'inactive'
+    number: '0135'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*Inactive/is'
+    category: 'inactive'
+    number: '0155'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user) closed due to inactivity/is'
+    category: 'inactive'
+    number: '0170'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user) not activated/is'
+    category: 'inactive'
+    number: '0177'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*(?:suspend|expire)/is'
+    category: 'inactive'
+    number: '0183'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*no longer exist/is'
+    category: 'inactive'
+    number: '0184'
+
+  - regexp: '/(?:forgery|abuse)/is'
+    category: 'inactive'
+    number: '0196'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*restrict/is'
+    category: 'inactive'
+    number: '0209'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*locked/is'
+    category: 'inactive'
+    number: '0228'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user) refused/is'
+    category: 'user_reject'
+    number: '0156'
+
+  - regexp: '/sender.*not/is'
+    category: 'user_reject'
+    number: '0206'
+
+  - regexp: '/Message refused/is'
+    category: 'command_reject'
+    number: '0175'
+
+  - regexp: '/No permit/is'
+    category: 'command_reject'
+    number: '0190'
+
+  - regexp: "/domain isn't in.*allowed rcpthost/is"
+    category: 'command_reject'
+    number: '0191'
+
+  - regexp: '/AUTH FAILED/is'
+    category: 'command_reject'
+    number: '0197'
+
+  - regexp: '/relay.*not.*(?:permit|allow)/is'
+    category: 'command_reject'
+    number: '0241'
+
+  - regexp: '/not local host/is'
+    category: 'command_reject'
+    number: '0204'
+
+  - regexp: '/Unauthorized relay/is'
+    category: 'command_reject'
+    number: '0215'
+
+  - regexp: '/Transaction.*fail/is'
+    category: 'command_reject'
+    number: '0221'
+
+  - regexp: '/Invalid data/is'
+    category: 'command_reject'
+    number: '0223'
+
+  - regexp: '/Local user only/is'
+    category: 'command_reject'
+    number: '0224'
+
+  - regexp: '/not.*permit.*to/is'
+    category: 'command_reject'
+    number: '0225'
+
+  - regexp: '/Content reject/is'
+    category: 'content_reject'
+    number: '0165'
+
+  - regexp: '/MIME\/REJECT/is'
+    category: 'content_reject'
+    number: '0212'
+
+  - regexp: '/MIME error/is'
+    category: 'content_reject'
+    number: '0217'
+
+  - regexp: '/Mail data refused.*AISP/is'
+    category: 'content_reject'
+    number: '0218'
+
+  - regexp: '/Host unknown/is'
+    category: 'dns_unknown'
+    number: '0130'
+
+  - regexp: '/Specified domain.*not.*allow/is'
+    category: 'dns_unknown'
+    number: '0180'
+
+  - regexp: '/No route to host/is'
+    category: 'dns_unknown'
+    number: '0188'
+
+  - regexp: '/unrouteable address/is'
+    category: 'dns_unknown'
+    number: '0208'
+
+  - regexp: '/Host or domain name not found/is'
+    category: 'dns_unknown'
+    number: '0238'
+
+  - regexp: '/loops back to myself/i'
+    category: 'dns_loop'
+    number: '0245'
+
+  - regexp: '/System.*busy/is'
+    category: 'defer'
+    number: '0112'
+
+  - regexp: '/Resources temporarily unavailable/is'
+    category: 'defer'
+    number: '0116'
+
+  - regexp: '/sender is rejected/is'
+    category: 'antispam'
+    number: '0101'
+
+  - regexp: '/Client host rejected/is'
+    category: 'antispam'
+    number: '0102'
+
+  - regexp: '/MAIL FROM(.*)mismatches client IP/is'
+    category: 'antispam'
+    number: '0104'
+
+  - regexp: '/denyip/is'
+    category: 'antispam'
+    number: '0144'
+
+  - regexp: '/client host.*blocked/is'
+    category: 'antispam'
+    number: '0242'
+
+  - regexp: '/mail.*reject/is'
+    category: 'antispam'
+    number: '0147'
+
+  - regexp: '/spam.*detect/is'
+    category: 'antispam'
+    number: '0162'
+
+  - regexp: '/reject.*spam/is'
+    category: 'antispam'
+    number: '0216'
+
+  - regexp: '/SpamTrap/is'
+    category: 'antispam'
+    number: '0200'
+
+  - regexp: '/Verify mailfrom failed/is'
+    category: 'antispam'
+    number: '0210'
+
+  - regexp: '/MAIL.*FROM.*mismatch/is'
+    category: 'antispam'
+    number: '0226'
+
+  - regexp: '/spam scale/is'
+    category: 'antispam'
+    number: '0211'
+
+  - regexp: '/Client host bypass/is'
+    category: 'antispam'
+    number: '0229'
+
+  - regexp: '/junk mail/is'
+    category: 'antispam'
+    number: '0230'
+
+  - regexp: '/message filtered/is'
+    category: 'antispam'
+    number: '0243'
+
+  - regexp: '/subject.*consider.*spam/is'
+    category: 'antispam'
+    number: '0222'
+
+  - regexp: '/Temporary local problem/is'
+    category: 'antispam'
+    number: '0142'
+
+  - regexp: '/system config error/is'
+    category: 'internal_error'
+    number: '0153'
+
+  - regexp: '/delivery.*suspend/is'
+    category: 'delayed'
+    number: '0213'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user)(.*)invalid/i'
+    category: 'unknown'
+    number: '0107'
+
+  - regexp: '/Deferred.*No such.*(?:file|directory)/i'
+    category: 'unknown'
+    number: '0141'
+
+  - regexp: '/mail receiving disabled/i'
+    category: 'unknown'
+    number: '0194'
+
+  - regexp: '/bad.*(?:alias|account|recipient|address|email|mailbox|user)/i'
+    category: 'unknown'
+    number: '02441'
+
+  - regexp: '/bad.*(?:alias|account|recipient|address|email|mailbox|user)/i'
+    category: 'unknown'
+    number: '0244'
+
+  - regexp: '/over.*quota/i'
+    category: 'full'
+    number: '0131'
+
+  - regexp: '/quota.*exceeded/i'
+    category: 'full'
+    number: '0150'
+
+  - regexp: '/exceed.*\n?.*quota/i'
+    category: 'full'
+    number: '0187'
+
+  - regexp: '/(?:alias|account|recipient|address|email|mailbox|user).*full/i'
+    catgory: 'full'
+    number: '0132'
+
+  - regexp: '/space.*not.*enough/i'
+    category: 'full'
+    number: '0219'
+
+  - regexp: '/Deferred.*Connection (?:refused|reset)/i'
+    category: 'defer'
+    number: '0239'
+
+  - regexp: '/Invalid host name/i'
+    category: 'dns_unknown'
+    number: '0239'
+
+  - regexp: '/Deferred.*No route to host/i'
+    category: 'dns_unknown'
+    number: '0240'
+
+  - regexp: '/Host unknown/i'
+    category: 'dns_unknown'
+    number: '0140'
+
+  - regexp: '/Name server timeout/i'
+    category: 'dns_unknown'
+    number: '0118'
+
+  - regexp: '/Deferred.*Connection.*tim(?:e|ed).*out/i'
+    category: 'dns_unknown'
+    number: '0119'
+
+  - regexp: '/Deferred.*host name lookup failure/i'
+    category: 'dns_unknown'
+    number: '0121'
+
+  - regexp: '/MX list.*point.*back/i'
+    category: 'dns_loop'
+    number: '0199'
+
+  - regexp: '/I\/O error/i'
+    category: 'internal_error'
+    number: '0120'
+
+  - regexp: '/connection.*broken/i'
+    category: 'internal_error'
+    number: '0231'
+
+  - regexp: '/Delivery to the following recipients failed.*\n.*\n.*/i'
+    category: 'other'
+    number: '0176'
+
+  - regexp: '/(?:User unknown|Unknown user)/i'
+    category: 'unknown'
+    number: '0193'
+
+  - regexp: '/Service unavailable/i'
+    category: 'unknown'
+    number: '0214'
+
+email:
+  - regexp: '/Original-Recipient: rfc822;(.*)/i'
+  - regexp: '/Final-Recipient: rfc822;(.*)/i'
+  - regexp: '/quota exceed.*<(\S+@\S+\w)>/is'
+
+action:
+  - regexp: '/Action: (.+)/i'
+
+status:
+  - regexp: '/Status: ([0-9\.]+)/i'
+
+diagnostic:
+  - regexp: '/Diagnostic-Code:((?:[^\n]|\n[\t ])+)(?:\n[^\t ]|$)/is'
+
+
 
 
