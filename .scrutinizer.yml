@@ -5,6 +5,8 @@ build:
   environment:
     postgresql: false
     redis: false
+    php:
+        version: 5.6
   tests:
     override:
       -
