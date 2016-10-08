@@ -1,5 +1,7 @@
-
 build:
+  environment:
+    postgresql: false
+    redis: false
   tests:
     override:
       -
@@ -7,3 +9,6 @@ build:
         coverage:
           file: 'cov.xml'
           format: 'clover'
+filter:
+    paths: ["src/*"]
+    excluded_paths:
