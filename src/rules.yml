@@ -1,0 +1,70 @@
+body:
+  -
+    regexp: '/domain\s+name\s+not\s+found/i'
+    category: 'dns_unknown'
+    number: '0999'
+
+  -
+    regexp: '/no\s+such\s+address\s+here/i'
+    category: 'unknown'
+    number: '0237'
+
+  -
+    regexp: '/user\s+unknown/i'
+    category: 'unknown'
+    number: '0236'
+
+  -
+    regexp: '/unknown\s+user/i'
+    category: 'unknown'
+    number: '0249'
+
+  -
+    regexp: '/no\s+mailbox/i'
+    category: 'unknown'
+    number: '0157'
+
+  -
+    regexp: "/can't\\s+find.*mailbox/i"
+    category: 'unknown'
+    number: '0164'
+
+  -
+    regexp: "/Can't\\s+create\\s+output.*<(\\S+@\\S+\\w)>/is"
+    category: 'unknown'
+    number: '0169'
+
+  -
+    regexp: '/=D5=CA=BA=C5=B2=BB=B4=E6=D4=DA/i'
+    category: 'unknown'
+    number: '0174'
+
+  -
+    regexp: '/Unrouteable\s+address/i'
+    category: 'unknown'
+    number: '0013'
+    idx_email: 1
+
+  -
+    regexp: '/unknown\s+local-part/i'
+    category: 'unknown'
+    number: '0232'
+
+  -
+    regexp: '/Invalid.*(?:alias|account|recipient|address|email|mailbox|user).*<(\S+@\S+\w)>/is'
+    category: 'unknown'
+    number: '0233'
+    idx_email: 1
+
+  -
+    regexp: '/No\s+such.*(?:alias|account|recipient|address|email|mailbox|user).*<(\S+@\S+\w)>/is'
+    category: 'unknown'
+    number: '0234'
+    idx_email: 1
+
+  -
+    regexp: '/not unique.\s+Several matches found/i'
+    category: 'unknown'
+    number: '0254'
+
+
